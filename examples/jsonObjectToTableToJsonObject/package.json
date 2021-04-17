@@ -1,0 +1,17 @@
+{
+  "name": "jsonobjecttotabletojsonobject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ."
+  },
+  "keywords": [
+    "example"
+  ],
+  "author": "Rishav Bhowmik",
+  "license": "MPL-2.0",
+  "dependencies": {
+    "tabularjson": "file:../.."
+  }
+}
