@@ -1,6 +1,7 @@
 // import { describe, it } from 'mocha'
 import { numberToUint8Array, Uint8ArraytoNumber } from '../lib/jsonObjectToTable/numberToUint8Array'
-import { jsonObjectToTable, tableToJsonObject } from '../lib/jsonObjectToTable/index'
+import { jsonObjectToTable, tableToJsonObject, tableToBuffer, bufferToTable } from '../lib/index'
+import { bufferToRow, rowToBuffer } from '../lib/tableToBuffer/rowToBuffer'
 import { sampleData, sampleTable, biggerSampleData } from './sample'
 const assert = require('assert')
 
@@ -55,6 +56,49 @@ describe("jsonObjectToTable/", () => {
     })
     it("jsonObjectToTable - tableToJsonObject", () => {
         const table = jsonObjectToTable(biggerSampleData)
+        const obj = tableToJsonObject(table)
+        assert.deepStrictEqual(obj, biggerSampleData)
+    })
+})
+
+describe("rowToBuffer/", () => {
+    it("rowToBuffer", () => {
+        const initTable = sampleTable.map((row) => (
+            {
+                parentId: row.parentId,
+                id: row.id,
+                key: row.key,
+                type: row.type,
+                data: new Uint8Array(row.data)
+            }
+        ))
+        const testRow = initTable[1]
+        const buffer = rowToBuffer(testRow)
+        const res = bufferToRow(buffer, 0)
+        assert.deepStrictEqual(res.row, testRow)
+        assert.deepEqual(res.endIndex, buffer.length)
+    })
+})
+
+describe("tableToBuffer/", () => {
+    it("tableToBufferToTable", () => {
+        const initTable = sampleTable.map((row) => (
+            {
+                parentId: row.parentId,
+                id: row.id,
+                key: row.key,
+                type: row.type,
+                data: new Uint8Array(row.data)
+            }
+        ))
+        const buffer = tableToBuffer(initTable)
+        const res = bufferToTable(buffer)
+        assert.deepStrictEqual(res, initTable)
+    })
+    it("jsonTorowBufferToBufferTorowBufferTojson", () => {
+        const initTable = jsonObjectToTable(biggerSampleData)
+        const tableBuffer = tableToBuffer(initTable)
+        const table = bufferToTable(tableBuffer)
         const obj = tableToJsonObject(table)
         assert.deepStrictEqual(obj, biggerSampleData)
     })
