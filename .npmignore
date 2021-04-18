@@ -105,7 +105,7 @@ dist
 
 # npm compile
 src
-test
+tests
 examples
 tsconfig.json
 docs
