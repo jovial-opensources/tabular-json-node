@@ -11,6 +11,14 @@ import {
   bufferToTable
 } from './tableToBuffer'
 
+import {
+  jsonObjectToBuffer
+} from './jsonObjectToBuffer/jsonObjectToBuffer'
+
+import {
+  bufferToJsonObject
+} from './jsonObjectToBuffer/bufferToJsonObject'
+
 export {
   jsonObjectToTable,
   tableToJsonObject,
@@ -18,5 +26,7 @@ export {
   ObjectTable,
   typeOfTypes,
   tableToBuffer,
-  bufferToTable
+  bufferToTable,
+  jsonObjectToBuffer,
+  bufferToJsonObject
 }

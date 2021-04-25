@@ -1,6 +1,6 @@
 // import { describe, it } from 'mocha'
 import { numberToUint8Array, Uint8ArraytoNumber } from '../lib/jsonObjectToTable/numberToUint8Array'
-import { jsonObjectToTable, tableToJsonObject, tableToBuffer, bufferToTable } from '../lib/index'
+import { jsonObjectToTable, tableToJsonObject, tableToBuffer, bufferToTable, jsonObjectToBuffer, bufferToJsonObject } from '../lib/index'
 import { bufferToRow, rowToBuffer } from '../lib/tableToBuffer/rowToBuffer'
 import { sampleData, sampleTable, biggerSampleData } from './sample'
 const assert = require('assert')
@@ -101,5 +101,13 @@ describe("tableToBuffer/", () => {
         const table = bufferToTable(tableBuffer)
         const obj = tableToJsonObject(table)
         assert.deepStrictEqual(obj, biggerSampleData)
+    })
+})
+
+describe("json to buffer", () => {
+    it("jsonObjectToBufferJsonObject", () => {
+        const buffer = jsonObjectToBuffer(biggerSampleData)
+        const object = bufferToJsonObject(buffer)
+        assert.deepStrictEqual(object, biggerSampleData)
     })
 })
