@@ -1,6 +1,10 @@
 import type { ObjectTupple, typeOfTypes } from "..";
 import { typeOfTypesEmum } from '.'
 
+/**
+ * @param row ObjectTupple/ a Row from ObjectTable
+ * @returns buffer representation of the row
+ */
 export const rowToBuffer = (row: ObjectTupple) => {
     /**
      * @description parentId as Buffer in 32bits LittleEndian
@@ -50,12 +54,21 @@ export const rowToBuffer = (row: ObjectTupple) => {
     ])
 }
 
+/**
+ * @param typeEnumValue positive integer value as number from enum `typeOfTypesEmum`
+ * @returns type name
+ */
 const toType = (typeEnumValue: number) => {
     const res: any = typeOfTypesEmum[typeEnumValue]
     const type: typeOfTypes = res
     return type
 }
 
+/**
+ * @param buffer parent buffer data to parse from
+ * @param startIndex starting index of the parent buffer to parse from
+ * @returns parsed row data as ObjectTupple and endIndex where parsing ends
+ */
 export const bufferToRow = (buffer: Buffer, startIndex: number) => {
     var bufferIndex = startIndex
     /**

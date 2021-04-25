@@ -13,5 +13,13 @@ export declare enum typeOfTypesEmum {
     function = 9,
     uint8array = 10
 }
+/**
+ * @param table Object table to convert
+ * @returns Return Buffer data of the table
+ */
 export declare const tableToBuffer: (table: ObjectTable) => Buffer;
+/**
+ * @param buffer Object Buffer to convert
+ * @returns Object table parsed from the buffer data
+ */
 export declare const bufferToTable: (buffer: Buffer) => ObjectTable;

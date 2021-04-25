@@ -4,6 +4,10 @@ import { bufferToRow, rowToBuffer } from "./rowToBuffer"
 
 export enum typeOfTypesEmum { undefined, null, boolean, number, bigint, string, array, object, symbol, function, uint8array }
 
+/**
+ * @param table Object table to convert
+ * @returns Return Buffer data of the table
+ */
 export const tableToBuffer = (table: ObjectTable) => {
     /**
      * @description number as rows in the table stored as Buffer in 32bit LittleEndian format
@@ -17,6 +21,10 @@ export const tableToBuffer = (table: ObjectTable) => {
     ])
 }
 
+/**
+ * @param buffer Object Buffer to convert
+ * @returns Object table parsed from the buffer data
+ */
 export const bufferToTable = (buffer: Buffer) => {
     /**
      * @description number as rows in the table stored as Buffer in 32bit LittleEndian format
