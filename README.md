@@ -76,10 +76,7 @@ To convert Binary data to JS Table
 
 ```js
 /**
- * Binary representation of Object
- * ```
- * { hello: 'World' }
- * ```
+ * Binary representation for Object `{ hello: 'World' }`
  */
 const binaryObject = new Buffer("020000000000000001000000070000000000000001000000020000000500050068656c6c6f05000000576f726c64", "hex")
 
