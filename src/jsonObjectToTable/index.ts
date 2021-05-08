@@ -6,14 +6,34 @@ export type ObjectTuppleId = number
  */
 export type typeOfTypes = 'undefined' | 'null' | 'boolean' | 'number' | 'bigint' | 'string' | 'array' | 'object' | 'symbol' | 'function' | 'uint8array'
 export type ObjectTupple = {
+    /**
+     * @description Id of the parent Object/Array in the Object table
+     */
     parentId: ObjectTuppleId,
+    /**
+     * @description Unique serial Id of all the rows in Object table
+     */
     id: ObjectTuppleId,
+    /**
+     * @description Unique key for child elements of an Array or Object
+     */
     key: string,
+    /**
+     * @description Data type of data stored in the row
+     */
     type: typeOfTypes,
+    /**
+     * @description Data parsed as Uint8Array using tuppleFor[] methods
+     */
     data: Uint8Array
 }
 export type ObjectTable = ObjectTupple[]
 
+/**
+ * @description collection of methods which return row object / tupple for each data type
+ * ### Naming convention
+ * - The name of child medthods in tuppleFor Object is as per the name of the DataType
+ */
 const tuppleFor = {
     "undefined": (id: ObjectTuppleId, parentId: ObjectTuppleId, key: string) => {
         const tupple: ObjectTupple = {
@@ -125,20 +145,41 @@ const tuppleFor = {
     }
 }
 
+/**
+ * This is a helper class to produce Object Table from JS Object using recursion
+ * Use this with jsonObjectToTable function
+ */
 class RecurseToTable {
+    /**
+     * Serial Incremental row 
+     */
     private indexUsed: number = 1
 
+    /**
+     * @description Increments indexUsed
+     * @returns Current value indexUsed, post increment
+     */
     public get newIndex(): number {
         return this.indexUsed++
     }
 
     private _table: ObjectTable = []
 
+    /**
+     * Public read access to Object Table
+     * @returns Object table of all the tupples
+     */
     public get table() {
         return this._table
     }
 
-    addTupple(data: any, parentId = 0, key = '') {
+    /**
+     * 
+     * @param data JS Object or premetive type to added in Object Table
+     * @param parentId Row Index of 
+     * @param key 
+     */
+    private addTupple(data: any, parentId = 0, key = '') {
 
         // identifing the type
         var type: typeOfTypes = typeof data
@@ -245,11 +286,22 @@ const objectFor = {
     }
 }
 
+/**
+ * This is a helper class to produce JS Object from Object Table using recursion
+ * Use this with tableToJsonObject function
+ */
 class RecurseToJsonObject {
+    /**
+     * @description Object Table is stored in this array
+     */
     table: ObjectTable = []
     constructor(table: ObjectTable) {
         this.table = table
     }
+    /**
+     * @param _id row index in Object table
+     * @returns Full depth Parsed Object/Array from given row index
+     */
     getObject: (_id: number) => any = (_id: number) => {
         const oRow = this.table.find(({ id }) => (id === _id))
         if (oRow === undefined) return oRow

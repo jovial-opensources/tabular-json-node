@@ -4,10 +4,25 @@ export declare type ObjectTuppleId = number;
  */
 export declare type typeOfTypes = 'undefined' | 'null' | 'boolean' | 'number' | 'bigint' | 'string' | 'array' | 'object' | 'symbol' | 'function' | 'uint8array';
 export declare type ObjectTupple = {
+    /**
+     * @description Id of the parent Object/Array in the Object table
+     */
     parentId: ObjectTuppleId;
+    /**
+     * @description Unique serial Id of all the rows in Object table
+     */
     id: ObjectTuppleId;
+    /**
+     * @description Unique key for child elements of an Array or Object
+     */
     key: string;
+    /**
+     * @description Data type of data stored in the row
+     */
     type: typeOfTypes;
+    /**
+     * @description Data parsed as Uint8Array using tuppleFor[] methods
+     */
     data: Uint8Array;
 };
 export declare type ObjectTable = ObjectTupple[];
