@@ -107,13 +107,13 @@ const parsedObject = tableToJsonObject(objectTable)
 
 ## Binary Format
 
-| Data         | Data Type | Size (Bytes) |
-| ------------ | --------- | ------------ |
-| NumberOfRows | UInt32LE  | 4            |
-| Row 1 Buffer | Buffer    | Variable     |
-| Row 2 Buffer | Buffer    | Variable     |
-| Row 3 Buffer | Buffer    | Variable     |
-| so on...     |
+| Data                      | Data Type | Size (Bytes) |
+| ------------------------- | --------- | ------------ |
+| NumberOfRows              | UInt32LE  | 4            |
+| Row 1 Buffer              | Buffer    | Variable     |
+| Row 2 Buffer              | Buffer    | Variable     |
+| Row 3 Buffer              | Buffer    | Variable     |
+| so on... for NumberOfRows |
 
 ### Buffer data Format for Row
 
