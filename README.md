@@ -104,3 +104,26 @@ const objectTable = bufferToTable(binaryObject)
 
 const parsedObject = tableToJsonObject(objectTable)
 ```
+
+## Binary Format
+
+| Data         | Data Type | Size (Bytes) |
+| ------------ | --------- | ------------ |
+| NumberOfRows | UInt32LE  | 4            |
+| Row 1 Buffer | Buffer    | Variable     |
+| Row 2 Buffer | Buffer    | Variable     |
+| Row 3 Buffer | Buffer    | Variable     |
+| so on...     |
+
+### Buffer data Format for Row
+
+| Data           | Data Type | Size (Bytes) |
+| -------------- | --------- | ------------ |
+| parentId       | UInt32LE  | 4            |
+| rowId          | UInt32LE  | 4            |
+| typeId         | UInt16LE  | 2            |
+| keyLength      | UInt16LE  | 2            |
+| keyLength      | UInt16LE  | 2            |
+| keyStringValue | Buffer    | KeyLength    |
+| dataLength     | UInt32LE  | 4            |
+| data           | Buffer    | dataLength   |
